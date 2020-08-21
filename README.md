@@ -13,7 +13,7 @@
 Путь к файлу храниться в настройках `settings.BUS_STATION_CSV`.
 Для чтения csv файла можете использовать
 [DictReader](https://docs.python.org/3/library/csv.html#csv.DictReader)
-и учтите что файл в кодировке cp1251
+и учтите что файл в кодировке ~~cp1251~~
 
 Для формирования url'а с get параметром помимо
 [reverse](https://docs.djangoproject.com/fr/2.1/ref/urlresolvers/#reverse) используйте
