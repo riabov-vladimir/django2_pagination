@@ -1,4 +1,5 @@
 import math
+import urllib
 from urllib.parse import urlencode
 import csv
 from django.core import paginator
@@ -27,18 +28,22 @@ def read_csv():
 def bus_stations(request):
 
     data = read_csv()
+
     paginator_obj = Paginator(data, 10)
+
     current_page = int(request.GET.get('page', 1))
 
     page_obj = paginator_obj.get_page(current_page)
 
     if page_obj.has_next():
-        next_page_url = '/bus_stations/?page={}'.format(page_obj.next_page_number())
+        next_page_url = reverse('bus_stations') + '?' + urllib.parse.urlencode({'page':
+                                                                                    page_obj.next_page_number()})
     else:
         next_page_url = None
 
     if page_obj.has_previous():
-        prev_page_url = '/bus_stations/?page={}'.format(page_obj.previous_page_number())
+        prev_page_url = reverse('bus_stations') + '?' + urllib.parse.urlencode({'page':
+                                                                                    page_obj.previous_page_number()})
     else:
         prev_page_url = None
 
@@ -48,3 +53,8 @@ def bus_stations(request):
         'prev_page_url': prev_page_url,
         'next_page_url': next_page_url
     })
+
+"""
+Для формирования url'а с get параметром помимо reverse используйте 
+
+"""
